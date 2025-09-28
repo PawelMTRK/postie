@@ -1,12 +1,12 @@
-<aside class="w-1/5 flex flex-col">
+<aside class="text-lg w-1/5 flex flex-col">
   <a href="/">
     <img src="logo.svg" alt="logo" />
   </a>
   {% if (app.user) %}
-  username
-  <a class="text-lg text-slate-400 hover:text-slate-600" href="/logout">Logout</a>
+  <span class="text-slate-600">{{ app.user.nickname }}</span>
+  <a class="text-slate-400 hover:text-slate-600" href="/logout">Logout</a>
   {% else %}
-  <a class="text-lg text-slate-400 hover:text-slate-600" href="/login">Login</a>
-  <a class="text-lg text-slate-400 hover:text-slate-600" href="/register">Register</a>
+  <a class="text-slate-400 hover:text-slate-600" href="/login">Login</a>
+  <a class="text-slate-400 hover:text-slate-600" href="/register">Register</a>
   {% endif %}
 </aside>

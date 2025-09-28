@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-2" {{ attributes }}>
+  {% for post in this.posts %}
+  <div class="text-slate-800 border bg-amber-100 p-1 border-solid border-inherit">
+    <span>{{ post.content }}</span>
+    <span class="font-bold">{{ post.author.nickname }}</span>
+    <span class="text-slate-500">{{ post.postedOn|date }}</span>
+  </div>
+  {% endfor %}
+</div>
