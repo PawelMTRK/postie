@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+
+<div class="w-20">
+  {{ form_widget(form.content) }}
+
+  <div class="flex">
+    {{ form_widget(form.topic) }}
+    {{ form_widget(form.post) }}
+  </div>
+</div>
+
+{{ form_end(form) }}

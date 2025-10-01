@@ -5,8 +5,7 @@
 {% block body %}
 
 <main class="w-4/5">
-  {{ form(form) }}
-
+  {% include 'feed/_form.html.twig' %}
   <twig:PostList />
 </main>
 
