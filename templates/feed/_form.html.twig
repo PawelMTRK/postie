@@ -1,12 +1,15 @@
-{{ form_start(form) }}
+<div class="mb-2">
+  {{ form_start(form) }}
 
-<div class="w-20">
   {{ form_widget(form.content) }}
 
-  <div class="flex">
+  <div class="gap-2 flex">
     {{ form_widget(form.topic) }}
     {{ form_widget(form.post) }}
   </div>
+
+  {{ form_end(form) }}
 </div>
 
-{{ form_end(form) }}
+
+
