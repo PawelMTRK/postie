@@ -16,6 +16,15 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findByAuthorId(int $id): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.author = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

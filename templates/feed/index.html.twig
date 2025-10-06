@@ -3,12 +3,11 @@
 {% block title %}Feed - Postie{% endblock %}
 
 {% block body %}
-
-<main class="w-4/5 pt-2">
+  
   {% if app.user %}
     {% include 'feed/_form.html.twig' %}
+    <hr class="my-2"/>
   {% endif %}
   <twig:PostList />
-</main>
 
 {% endblock %}

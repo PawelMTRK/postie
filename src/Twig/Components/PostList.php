@@ -8,11 +8,16 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent]
 final class PostList
 {
+    public int $author_id = 0;
+
     public function __construct(private PostRepository $postRepository)
     {}
-    
+
     public function getPosts(): array
     {
-        return $this->postRepository->findAll();
+        if ($this->author_id != 0)
+            return $this->postRepository->findByAuthorId($this->author_id);
+        else
+            return $this->postRepository->findAll();
     }
 }

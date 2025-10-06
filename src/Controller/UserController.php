@@ -54,6 +54,15 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/user/{nickname}', name: 'app_profile')]
+    public function profile(string $nickname, EntityManagerInterface $em): Response
+    {
+        $user = $em->getRepository(User::class)->findOneBy(['nickname' => $nickname]);
+        return $this->render('user/profile.html.twig', [
+            'user' => $user
+        ]);
+    }
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
