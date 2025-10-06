@@ -1,17 +1,17 @@
 {% use 'tailwind_2_layout.html.twig' %}
 
 {% block textarea_widget %}
-  {%- set attr = attr|merge({class: attr.class|default('w-full border-b resize-none p-2 border-slate-300 bg-slate-100')}) -%}
+  {%- set attr = attr|merge({class: attr.class|default('w-full border-b-2 resize-none p-2 border-slate-300 bg-slate-100')}) -%}
   {{- parent() -}}
 {% endblock %}
 
 {%block widget_attributes %}
-  {%- set attr = attr|merge({class: attr.class|default('w-full border-b p-2 border-slate-300 bg-slate-100')}) -%}
+  {%- set attr = attr|merge({class: attr.class|default('w-full border-b-2 p-2 border-slate-300 bg-slate-100')}) -%}
   {{- parent() -}}
 {% endblock %}
 
 {%block submit_widget %}
-  {%- set attr = attr|merge({class: attr.class|default('w-full border-b p-2 border-slate-300 bg-slate-100')}) -%}
+  {%- set attr = attr|merge({class: attr.class|default('w-full border-b-2 p-2 border-slate-300 bg-slate-100')}) -%}
   {{- parent() -}}
 {% endblock %}
 

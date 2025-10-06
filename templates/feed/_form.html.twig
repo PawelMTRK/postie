@@ -1,5 +1,5 @@
-<div class="mb-2">
-  {{ form_start(form) }}
+{{ form_start(form) }}
+<div class="mb-2 flex flex-col gap-2">
 
   {{ form_widget(form.content) }}
 
@@ -8,8 +8,8 @@
     {{ form_widget(form.post) }}
   </div>
 
-  {{ form_end(form) }}
 </div>
+{{ form_end(form) }}
 
 
 

@@ -4,8 +4,10 @@
 
 {% block body %}
 
-<main class="w-4/5">
-  {% include 'feed/_form.html.twig' %}
+<main class="w-4/5 pt-2">
+  {% if app.user %}
+    {% include 'feed/_form.html.twig' %}
+  {% endif %}
   <twig:PostList />
 </main>
 
