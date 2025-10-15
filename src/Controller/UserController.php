@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\Type\UserType;
+use App\Form\Type\UserSettingsType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,6 +63,27 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
+    #[Route(path: '/settings', name: 'app_edit')]
+    public function settings(Request $request, EntityManagerInterface $em): Response
+    {
+        // TODO more fields and nickname checking
+        $user = $this->getUser();
+        $form = $this->createForm(UserSettingsType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User */
+            $user = $form->getData();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect('/user/' . $user->getNickname());
+        }
+
+        return $this->render('user/settings.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
