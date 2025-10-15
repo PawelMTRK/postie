@@ -1,6 +1,6 @@
 <aside class="text-lg w-1/5 flex flex-col">
   <a href="/">
-    <img src="logo.svg" alt="logo" />
+    <img class="inline w-8 m-1" src="{{ asset(path='logo.svg') }}" alt="logo" />
   </a>
   {% if (app.user) %}
     <span class="text-slate-600">{{ app.user.nickname }}</span>
