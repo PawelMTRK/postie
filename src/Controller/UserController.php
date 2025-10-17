@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Form\Type\UserType;
 use App\Form\Type\UserSettingsType;
+use App\Form\Type\UserType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
-    #[Route(path: '/register', name: 'app_register')]
+    #[Route(path: '/register', name: 'user_register')]
     public function register(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
@@ -40,22 +40,26 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route(path: '/login', name: 'user_login')]
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
+        // HACK: uses form without data, login is handled auto
+        // move the stuff into UserType class
+        // instead of login.html.twig template
+        // https://symfony.com/doc/current/security.html#form-login
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $form = $this->createForm(UserType::class);
 
         return $this->render('user/login.html.twig', [
-            'last_username' => $lastUsername,
             'error' => $error,
+            'form' => $form,
         ]);
     }
 
-    #[Route(path: '/user/{nickname}', name: 'app_profile')]
+    #[Route(path: '/user/{nickname}', name: 'user_profile')]
     public function profile(string $nickname, EntityManagerInterface $em): Response
     {
         $user = $em->getRepository(User::class)->findOneBy(['nickname' => $nickname]);
@@ -63,7 +67,7 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
-    #[Route(path: '/settings', name: 'app_edit')]
+    #[Route(path: '/settings', name: 'user_edit')]
     public function settings(Request $request, EntityManagerInterface $em): Response
     {
         // TODO more fields and nickname checking
@@ -85,7 +89,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'user_logout')]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
